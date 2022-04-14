@@ -1,0 +1,44 @@
+-- 16. Calcular la cantidad y el promedio de cada forma de pago para los check-in.
+-- Mostrar la forma de pago, cantidad y el promedio formateado con dos decimales.
+-- rows: 4
+SELECT nombre AS Forma_Pago,
+SUM(importe) AS Cantidad_Pagada,
+ROUND(AVG(importe),2) AS Promedio_Pagado 
+FROM checkin
+JOIN forma_pago ON forma_pago_id = forma_pago.id
+GROUP BY Forma_Pago;
+
+
+-- 17. Calcular la edad de los empleados de Argentina.
+-- Mostrar el apellido, nombre y la edad del empleado.
+-- rows: 17
+SELECT empleado.apellido, empleado.nombre,
+TIMESTAMPDIFF(YEAR,fecha_nacimiento,CURDATE()) AS edad
+FROM empleado
+JOIN pais ON pais_id = id
+WHERE pais.nombre = 'Argentina';
+
+-- 18. Calcular el importe total para los check-in realizados por el huésped 'Mercado Joel'.
+-- Mostrar apellido, nombre, importe total y el país de origen.
+-- rows: 1
+SELECT huesped.apellido, huesped.nombre, pais.nombre AS Pais,
+SUM(checkin.importe) AS Importe_Total
+FROM huesped
+JOIN checkin ON huesped.id = huesped_id
+JOIN pais ON huesped.pais_id = pais.id
+WHERE huesped.apellido = 'Mercado' AND huesped.nombre = 'Joel'
+GROUP BY huesped.apellido, huesped.nombre, Pais;
+
+
+-- 19. Listar la forma de pago empleada por cada servicio extra.
+-- Se debe mostrar el nombre del servicio extra, nombre de la forma de pago y
+-- calcular la cantidad y total recaudado.
+-- rows: 16
+SELECT servicio_extra.nombre AS Servicio_Extra, forma_pago.nombre AS Forma_Pago,
+COUNT(checkin.forma_pago_id) AS Veces_Usada,
+SUM(checkin.importe) AS Total_Pagado
+FROM servicio_extra
+JOIN reserva ON servicio_extra.id = servicio_extra_id
+JOIN forma_pago ON forma_pago_id = forma_pago.id
+JOIN checkin ON checkin.forma_pago_id = forma_pago.id
+GROUP BY servicio_extra.nombre, forma_pago.nombre;
