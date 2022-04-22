@@ -1,0 +1,15 @@
+SELECT * FROM vuelos INNER JOIN partidasdestinos ON vuelos.PartidaId = partidasdestinos.PartidaDestinoId INNER JOIN aeropuertos ON partidasdestinos.AeropuertoId = aeropuertos.AeropuertoId ORDER BY NumeroVuelo DESC
+SELECT * FROM vuelos INNER JOIN partidasdestinos ON vuelos.PartidaId = partidasdestinos.PartidaDestinoId INNER JOIN aeropuertos ON partidasdestinos.AeropuertoId = aeropuertos.AeropuertoId ORDER BY NumeroVuelo WHERE aeropuertos.Nombre LIKE 'Ministro Pistarini'
+SELECT * FROM vuelos INNER JOIN partidasdestinos ON vuelos.PartidaId = partidasdestinos.PartidaDestinoId INNER JOIN aeropuertos ON partidasdestinos.AeropuertoId = aeropuertos.AeropuertoId WHERE aeropuertos.Nombre LIKE 'Ministro Pistarini'
+SELECT * FROM vuelos INNER JOIN partidasdestinos ON vuelos.PartidaId = partidasdestinos.PartidaDestinoId INNER JOIN aeropuertos ON partidasdestinos.AeropuertoId = aeropuertos.AeropuertoId WHERE aeropuertos.Nombre LIKE 'Ministro Pistarini' ORDER BY NumeroVuelo DESC
+
+
+SELECT Nombre, Nombre FROM aeropuertos INNER JOIN partidasdestinos ON aeropuertos.AeropuertoId = partidasdestinos.AeropuertoId ORDER BY Nombre, Nombre DESC
+SELECT aeropuertos.Nombre, partidasdestinos.Nombre FROM aeropuertos INNER JOIN partidasdestinos ON aeropuertos.AeropuertoId = partidasdestinos.AeropuertoId ORDER BY aeropuertos.Nombre, partidasdestinos.Nombre DESC
+SELECT aeropuertos.Nombre, partidasdestinos.Nombre FROM aeropuertos ORDER BY aeropuertos.Nombre, partidasdestinos.Nombre DESC INNER JOIN partidasdestinos ON aeropuertos.AeropuertoId = partidasdestinos.AeropuertoId
+SELECT aeropuertos.Nombre, partidasdestinos.Nombre FROM aeropuertos INNER JOIN partidasdestinos ON aeropuertos.AeropuertoId = partidasdestinos.AeropuertoId
+
+SELECT P.PARTIDO, AVG (V.VOTOS) as ‘cantidad de votos del partido’ FROM PARTIDOS as P INNER JOIN VOTOS as V ON P.ID_PARTIDO = V.ID_PARTIDO GROUP BY P.PARTIDO ORDER BY AVG(V.VOTOS) ASC
+SELECT P.PARTIDO, AVG (V.VOTOS) as ‘cantidad de votos del partido’ FROM PARTIDOS as P INNER JOIN VOTOS as V ON P.ID_PARTIDO = V.ID_PARTIDO GROUP BY V.VOTOS, P.PARTIDO ORDER BY AVG(V.VOTOS) DESC
+SELECT P.PARTIDO, AVG (V.VOTOS) as ‘cantidad de votos del partido’ FROM PARTIDOS as P INNER JOIN VOTOS as V ON P.ID_PARTIDO = V.ID_PARTIDO GROUP BY P.PARTIDO ORDER BY AVG(V.VOTOS) DESC
+SELECT P.PARTIDO, COUNT(V.VOTOS) as ‘cantidad de votos del partido’ FROM PARTIDOS as P INNER JOIN VOTOS as V ON P.ID_PARTIDO = V.ID_PARTIDO GROUP BY P.PARTIDO ORDER BY COUNT(V.VOTOS) ASC

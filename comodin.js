@@ -1,17 +1,64 @@
-/* Se está realizando el desarrollo de una aplicación para control de gastos. Cada día, el usuario ingresa sus gastos cotidianos.
-La idea es solo registrar el total de los gastos, al finalizar la jornada.
-Para simplificar, vamos a considerar que todos los meses tienen cuatro semanas.
-Los gastos estarán en una matriz de 4x7, cada fila representa una semana y cada columna un día. Es decir fila 0, semana 1, fila 1, semana 2, etc. Columna 0, dia 1, columna 1, dia 2, etcétera. 
-a)  Lo que nos solicitan es dar el total de gastos en una semana. Recordemos que cada fila representa una semana, es decir, si nos indican semana 2 tenemos que sumar la fila 1 de la matriz. Recordar que las matrices comienzan siempre en posición 0. 
-b) La aplicación también tendrá una parte de estadísticas, para esto nos solicitan dar el total de un día en particular, por ejemplo del día 3, acá también tengamos en cuenta lo que ocurre con las filas, ya que las columnas también comienzan en 0.
-c) Por último, es necesario tener el total de gastos realizados en el mes.
-Pregunta para pensar, ¿es lo mismo recorrer por filas o por columnas para resolver este último punto?
- */
+// ********* EJERCICIO 3:
 
+// A. Crea una matriz de 3x3, cuadrada, con números enteros negativos en cada una de sus posiciones.
 
-let gastoMes =[
-	[1135,2500,900,1600,2800,3650,1100],
-	[1750,1890,1900,1300,898,1750,2800],
-	[1700,1150,1690,1900,1770,4500,2560],
-	[800,1250,1430,2100,1980,1270,950]
+let matrix = [
+    [-23, -45, -52],
+    [-12, -49, -63],
+    [-9, -77, -35],
 ]
+
+// B. Crear una función que retorne la suma de todos los números dentro de la matriz que sean múltiplos de 5.
+function sumaMultiplosDe5(objetoMatriz) {
+	let multiplos = 0
+    for (let row = 0; row < objetoMatriz.length; row++) {
+		for (let column = 0; column < objetoMatriz[row].length; column++) {
+			if(objetoMatriz[row][column] % 5 === 0){
+				multiplos = multiplos + objetoMatriz[row][column];
+			}
+		}
+	}
+	return multiplos
+}
+
+console.table(matrix);
+/* console.log(sumaMultiplosDe5(matrix)); */
+
+
+// C. Crear una función que retorne un valor booleano dependiendo si la suma de todos los valores de la matriz es impar.
+
+function sumatoriaMatrizPar(objetoMatriz) {
+	function sumarTodo(){
+		let sumatoria = 0
+		for (let row = 0; row < objetoMatriz.length; row++) {
+			for (let column = 0; column < objetoMatriz[row].length; column++) {
+				sumatoria = sumatoria + objetoMatriz[row][column];
+			}
+		}
+		return sumatoria
+	}
+	sumarTodo()
+	return Boolean(sumarTodo() % 2 !== 0)
+}
+
+/* console.log(sumatoriaMatrizPar(matrix)) */
+
+// D. Crear una función que retorne la suma de las diagonales de la matriz.
+
+function sumatoriaDiagonales(objetoMatriz) {
+	let diagonalDesc = 0
+	let diagonalAsc = 0
+    for (let row = 0; row < objetoMatriz.length; row++) {
+		for (let column = 0; column < objetoMatriz[row].length; column++) {
+			if (row === column){
+				diagonalDesc = diagonalDesc + objetoMatriz[row][column]
+			}
+			if (row + column === objetoMatriz.length - 1){
+				diagonalAsc = diagonalAsc + objetoMatriz[row][column]
+			}
+		}
+	}
+	return (diagonalDesc + diagonalAsc)
+}
+
+console.log(sumatoriaDiagonales(matrix)); 
